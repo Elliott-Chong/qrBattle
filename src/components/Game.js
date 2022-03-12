@@ -24,21 +24,24 @@ initializeApp(firebaseConfig);
 var database = ref(getDatabase());
 function Game({ match }) {
   const [userID, setUserID] = React.useState(match.params.userId);
-  const [user1Score, setUser1Score] = React.useState();
-  const [user2Score, setUser2Score] = React.useState();
+  const [player1Score, setPlayer1Score] = React.useState();
+  const [player2Score, setPlayer2Score] = React.useState();
   React.useEffect(() => {
     get(child(database, userID)).then((snapshot) => {
-      console.log(snapshot.val());
-      setUser1Score(snapshot.val().score);
+      setPlayer1Score(snapshot.val().score);
     });
     get(child(database, localStorage.getItem("userID").toString())).then(
       (snapshot) => {
-        console.log(snapshot.val());
-        setUser2Score(snapshot.val().score);
+        setPlayer2Score(snapshot.val().score);
       }
     );
   }, [userID]);
-  return <div>Game</div>;
+  return (
+    <div className="flex flex-col justify-center items-center min-h-screen">
+      <p>Player 1 score: {player1Score}</p>
+      <p>Player 2 score: {player2Score}</p>
+    </div>
+  );
 }
 
 export default Game;
