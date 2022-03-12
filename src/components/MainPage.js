@@ -10,8 +10,6 @@ import {
   update,
 } from "firebase/database";
 
-const rootURL = "https://qrbattle.netlify.app";
-
 const firebaseConfig = {
   apiKey: "AIzaSyBGA0jaymuCb8BNiv-26XrWD1GG4gqa3Kw",
   authDomain: "qrbattle-1fc4e.firebaseapp.com",
@@ -99,9 +97,15 @@ function MainPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-5xl font-poppins font-bold">Your QR Code:</h1>
+      <h1
+        onClick={(_) => history.push("/qr")}
+        className="mt-2 bg-black text-white px-4 py-2"
+      >
+        Scan QR
+      </h1>
       <img
         // className="h-100"
-        src={`https://chart.googleapis.com/chart?chl=${rootURL}/${userID}&chs=400x400&cht=qr`}
+        src={`https://chart.googleapis.com/chart?chl=${userID}&chs=400x400&cht=qr`}
         alt=""
       />
       <p className="text-xl font-poppins">Score: {userScore}</p>

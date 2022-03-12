@@ -58,6 +58,8 @@ function Game({ match }) {
   }
   //Start Match
 
+  //player 1 is scanee
+
   React.useEffect(() => {
     const winPerson = battle(player1Score, player2Score);
     console.log(winPerson);
@@ -65,14 +67,12 @@ function Game({ match }) {
     setWinner(winPerson);
     if (player1Score && player2Score) {
       if (winPerson === "P1") {
-        console.log("p1 wins");
         setScores(
           userID.toString(),
           localStorage.getItem("userID").toString(),
           Math.ceil(parseInt(player1Score) + parseInt(player2Score) / 2)
         );
       } else {
-        console.log("p2 wins");
         setScores(
           localStorage.getItem("userID").toString(),
           userID.toString(),
@@ -94,10 +94,13 @@ function Game({ match }) {
 
   return (
     <div className="flex flex-col justify-center items-center min-h-screen">
-      <p>Player 1 score: {player1Score}</p>
-      <p>Player 2 score: {player2Score}</p>
-      {winner === "P2" ? "Player 2 wins!" : "Player 1 wins!"}
-      <button className="mt-2" onClick={(_) => history.push("/")}>
+      <p>Your Score: {player2Score}</p>
+      <p>Opponent's score: {player1Score}</p>
+      {winner === "P2" ? "You Win" : "You Lose"}
+      <button
+        className="mt-2 py-2 px-4 bg-black text-white"
+        onClick={(_) => history.push("/")}
+      >
         Back Home
       </button>
     </div>

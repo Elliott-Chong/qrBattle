@@ -10,6 +10,7 @@ function Qr() {
       <div className="flex flex-col justify-center items-center">
         <video className="" id="video"></video>
       </div>
+
       <QrReader
         className="h-0 w-0"
         onResult={(result, error) => {
