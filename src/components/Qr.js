@@ -7,7 +7,7 @@ function Qr() {
   return (
     <>
       <div className="flex flex-col justify-center items-center">
-        <video src="" id="video"></video>
+        <video className="" id="video"></video>
         <p>{data}</p>
       </div>
       <QrReader
