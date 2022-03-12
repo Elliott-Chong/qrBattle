@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  getDatabase,
-  ref,
-  get,
-  child,
-  update,
-  equalTo,
-  orderByChild,
-} from "firebase/database";
+import { getDatabase, ref, get, child, update } from "firebase/database";
 import { useHistory } from "react-router-dom";
 import { initializeApp } from "@firebase/app";
 const firebaseConfig = {
