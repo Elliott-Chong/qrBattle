@@ -55,11 +55,9 @@ const processData = () => {
       if (!snapshot.exists()) {
         localStorage.removeItem(userID);
         userID = generateRandomNumber(0, 10000000);
-        update(
-          child(database, userID, {
-            score: generateRandomNumber(5, 10),
-          })
-        )
+        update(child(database, userID), {
+          score: generateRandomNumber(5, 10),
+        })
           .then((x) => {
             localStorage.setItem("userID", userID);
           })
@@ -89,11 +87,11 @@ function MainPage() {
     onValue(child(database, userID), (snapshot) => {
       setUserScore(snapshot.val().score);
       if (snapshot.val().score === 0) {
-        prompt("Your Score is 0, do you wish to reset?", () => {
+        if (window.confirm("Your score is 0, do you wish to reset?")) {
           update(child(database, userID), {
-            score: generateRandomNumber(5, 10),
+            score: generateRandomNumber(5, 1000),
           });
-        });
+        }
       }
     });
   }, [userID, history]);
