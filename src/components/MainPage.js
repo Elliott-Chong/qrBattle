@@ -54,7 +54,7 @@ const processData = () => {
         localStorage.removeItem(userID);
         userID = generateRandomNumber(0, 10000000);
         update(child(database, userID), {
-          score: generateRandomNumber(5, 10),
+          score: generateRandomNumber(5, 1000),
         })
           .then((x) => {
             localStorage.setItem("userID", userID);
