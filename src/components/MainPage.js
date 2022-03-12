@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { initializeApp } from "firebase/app";
+import { useHistory } from "react-router-dom";
 import {
   getDatabase,
   ref,
@@ -9,7 +10,7 @@ import {
   update,
 } from "firebase/database";
 
-const rootURL = "http://localhost:5000";
+const rootURL = "https://qrbattle.netlify.app";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBGA0jaymuCb8BNiv-26XrWD1GG4gqa3Kw",
@@ -36,7 +37,7 @@ const processData = () => {
   if (!userID) {
     userID = generateRandomNumber(0, 10000000).toString();
     update(child(database, userID), {
-      score: generateRandomNumber(5, 1000),
+      score: generateRandomNumber(5, 10),
     })
       .then((x) => {
         localStorage.setItem("userID", userID);
@@ -56,18 +57,18 @@ const processData = () => {
         userID = generateRandomNumber(0, 10000000);
         update(
           child(database, userID, {
-            score: generateRandomNumber(5, 1000),
+            score: generateRandomNumber(5, 10),
           })
-            .then((x) => {
-              localStorage.setItem("userID", userID);
-            })
-            .catch((e) => {
-              alert(e);
-            })
-            .finally(() => {
-              console.log("Done");
-            })
-        );
+        )
+          .then((x) => {
+            localStorage.setItem("userID", userID);
+          })
+          .catch((e) => {
+            alert(e);
+          })
+          .finally(() => {
+            console.log("Done");
+          });
       }
     });
   }
@@ -76,6 +77,7 @@ const processData = () => {
 };
 
 function MainPage() {
+  const history = useHistory();
   const [userID, setUserID] = useState();
   const [userScore, setUserScore] = useState();
 
@@ -86,8 +88,15 @@ function MainPage() {
     if (!userID) return;
     onValue(child(database, userID), (snapshot) => {
       setUserScore(snapshot.val().score);
+      if (snapshot.val().score === 0) {
+        prompt("Your Score is 0, do you wish to reset?", () => {
+          update(child(database, userID), {
+            score: generateRandomNumber(5, 10),
+          });
+        });
+      }
     });
-  }, [userID]);
+  }, [userID, history]);
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">

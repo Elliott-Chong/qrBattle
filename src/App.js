@@ -9,7 +9,7 @@ function App() {
     <Switch>
       <Route path="/" exact component={MainPage} />
       {/* <Route path="/qr" exact component={Qr} /> */}
-      <Route path="/:userId" exact component={Game} />
+      <Route path="/:userID" exact component={Game} />
     </Switch>
   );
 }
