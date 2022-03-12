@@ -1,4 +1,3 @@
-import React from "react";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, get, set, child, update } from "firebase/database";
 
@@ -17,21 +16,15 @@ initializeApp(firebaseConfig);
 
 var database = ref(getDatabase());
 
-localStorage.setItem("", "");
+var postData = { UserID: 1 };
 
-function MainPage() {
-  get(child(database, "xxx"), { xd: 3000 })
-    .then((x) => {
-      console.log(x);
-    })
-    .catch((e) => {
-      console.log(e);
-    })
-    .finally(() => {
-      console.log(1);
-    });
-
-  return <div>MainPage</div>;
-}
-
-export default MainPage;
+set(child(database, "xxx"), postData)
+  .then((x) => {
+    console.log(x);
+  })
+  .catch((e) => {
+    console.log(e);
+  })
+  .finally(() => {
+    console.log(1);
+  });
