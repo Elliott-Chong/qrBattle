@@ -12,6 +12,7 @@ function Qr() {
       </div>
 
       <QrReader
+        constraints={"environment"}
         className="h-0 w-0"
         onResult={(result, error) => {
           if (!!result) {
