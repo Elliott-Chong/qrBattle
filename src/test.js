@@ -28,3 +28,12 @@ set(child(database, "xxx"), postData)
   .finally(() => {
     console.log(1);
   });
+
+function miniGame(player1Score, player2Score) {
+  probability = 1 / (1 + 10 ** (Math.abs(player1Score - player2Score) / 600));
+  return Math.random() < probability;
+  // } else if (player1Score < player2Score) {
+  //   probability = 1 / (1 + 10 ** ((player2Score - player1Score) / 600));
+  //   return Math.random() > probability;
+  //   //True = P1, False = P2
+}
